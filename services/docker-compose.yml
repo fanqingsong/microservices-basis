@@ -39,16 +39,17 @@ services:
           - ./users:/users
         <<: *server-tmpl
 
+    pgadmin:
+      image: m.daocloud.io/docker.io/dpage/pgadmin4
+      ports:
+        - 5050:80
+      depends_on:
+        - db
+      <<: *server-tmpl
+
     db:
       image: postgres:12.4-alpine
       ports:
         - 5432:5432
       <<: *server-tmpl
 
-    pgadmin:
-      image: dpage/pgadmin4
-      ports:
-        - 5050:80
-      depends_on:
-        - db
-      <<: *server-tmpl
